@@ -3,7 +3,7 @@
  *
  *  Pentaho Data Integration
  *
- *  Copyright (C) 2002-2017 by Hitachi Vantara : http://www.pentaho.com
+ *  Copyright (C) 2002-2022 by Hitachi Vantara : http://www.pentaho.com
  *
  *  *******************************************************************************
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -24,16 +24,23 @@
 
 package org.pentaho.di.engine.configuration.impl.spark;
 
+import com.lowagie.text.Meta;
+import org.pentaho.di.core.exception.KettlePluginException;
+import org.pentaho.di.core.service.PluginServiceLoader;
 import org.pentaho.di.engine.configuration.api.RunConfiguration;
 import org.pentaho.di.engine.configuration.api.RunConfigurationExecutor;
 import org.pentaho.di.engine.configuration.api.RunConfigurationProvider;
 import org.pentaho.di.engine.configuration.impl.MetaStoreRunConfigurationFactory;
 import org.pentaho.di.trans.TransMeta;
+import org.pentaho.metastore.api.IMetaStore;
 import org.pentaho.metastore.api.exceptions.MetaStoreException;
+import org.pentaho.metastore.locator.api.MetastoreLocator;
 import org.pentaho.metastore.persist.MetaStoreFactory;
-import org.pentaho.osgi.metastore.locator.api.MetastoreLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,14 +50,27 @@ import java.util.List;
 public class SparkRunConfigurationProvider extends MetaStoreRunConfigurationFactory
   implements RunConfigurationProvider {
 
+  private Logger logger = LoggerFactory.getLogger( SparkRunConfigurationProvider.class );
   public static String TYPE = "Spark";
   private SparkRunConfigurationExecutor sparkRunConfigurationExecutor;
   private List<String> supported = Arrays.asList( TransMeta.XML_TAG );
 
-  public SparkRunConfigurationProvider( MetastoreLocator metastoreLocator,
-                                        SparkRunConfigurationExecutor sparkRunConfigurationExecutor ) {
+  public SparkRunConfigurationProvider() {
+    super( null );
+    MetastoreLocator metastoreLocator = null;
+    try {
+      Collection<MetastoreLocator> metastoreLocators = PluginServiceLoader.loadServices( MetastoreLocator.class );
+      metastoreLocator = metastoreLocators.stream().findFirst().get();
+      super.setMetastoreLocator( metastoreLocator );
+    } catch ( Exception e ) {
+      logger.warn( "Error getting MetastoreLocator", e );
+    }
+    this.sparkRunConfigurationExecutor = SparkRunConfigurationExecutor.getInstance();
+  }
+
+  public SparkRunConfigurationProvider( MetastoreLocator metastoreLocator ) {
     super( metastoreLocator );
-    this.sparkRunConfigurationExecutor = sparkRunConfigurationExecutor;
+    this.sparkRunConfigurationExecutor = SparkRunConfigurationExecutor.getInstance();
   }
 
   @Override public RunConfiguration getConfiguration() {

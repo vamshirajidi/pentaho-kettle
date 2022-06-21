@@ -27,22 +27,27 @@
     <kettle-palo-plugin.version>${project.version}</kettle-palo-plugin.version>
     <pdi-google-analytics-plugin.version>9.4.0.0-SNAPSHOT</pdi-google-analytics-plugin.version>
     <pdi-salesforce-plugin.version>9.4.0.0-SNAPSHOT</pdi-salesforce-plugin.version>
+    <monet-db-bulk-loader-plugin.version>${project.version}</monet-db-bulk-loader-plugin.version>
     <ms-access-plugin.version>${project.version}</ms-access-plugin.version>
     <mysql-bulk-load-plugin.version>${project.version}</mysql-bulk-load-plugin.version>
+    <oracle-bulk-loader-plugin.version>${project.version}</oracle-bulk-loader-plugin.version>
+    <postgresql-db-bulk-loader-plugin.version>${project.version}</postgresql-db-bulk-loader-plugin.version>
+    <infobright-bulk-loader-plugin.version>${project.version}</infobright-bulk-loader-plugin.version>
     <lucid-db-streaming-loader-plugin.version>${project.version}</lucid-db-streaming-loader-plugin.version>
     <gp-bulk-loader-plugin.version>${project.version}</gp-bulk-loader-plugin.version>
     <pentaho-googledrive-vfs-plugin.version>${project.version}</pentaho-googledrive-vfs-plugin.version>
     <elasticsearch-bulk-insert-plugin.version>${project.version}</elasticsearch-bulk-insert-plugin.version>
-    <pdi-xml-plugin.version>9.4.0.0-SNAPSHOT</pdi-xml-plugin.version>
-    <pdi-json-plugin.version>9.4.0.0-SNAPSHOT</pdi-json-plugin.version>
     <pdi-sap-plugin.version>9.4.0.0-SNAPSHOT</pdi-sap-plugin.version>
-    <big-data-plugin.version>9.4.0.0-SNAPSHOT</big-data-plugin.version>
     <pentaho-cassandra-plugin.version>9.4.0.0-SNAPSHOT</pentaho-cassandra-plugin.version>
     <pdi-teradata-tpt-plugin-package.version>${project.version}</pdi-teradata-tpt-plugin-package.version>
     <pdi-platform-utils-plugin.version>9.4.0.0-SNAPSHOT</pdi-platform-utils-plugin.version>
     <vertica-bulkloader-plugin.version>9.4.0.0-SNAPSHOT</vertica-bulkloader-plugin.version>
     <pdi-pur-plugin.version>9.4.0.0-SNAPSHOT</pdi-pur-plugin.version>
     <pentaho-mongodb-plugin.version>9.4.0.0-SNAPSHOT</pentaho-mongodb-plugin.version>
+    <engine-configuration-plugin.version>${project.version}</engine-configuration-plugin.version>
+    <metastore-locator-plugin.version>${project.version}</metastore-locator-plugin.version>
+    <repository-locator-plugin.version>${project.version}</repository-locator-plugin.version>
+    <file-open-save-new-plugin.version>${project.version}</file-open-save-new-plugin.version>
   </properties>
 
   <dependencies>
@@ -180,8 +185,8 @@
     </dependency>
     <dependency>
       <groupId>org.pentaho.di.plugins</groupId>
-      <artifactId>ms-access-plugins</artifactId>
-      <version>${ms-access-plugin.version}</version>
+      <artifactId>monet-db-bulk-loader-plugins</artifactId>
+      <version>${monet-db-bulk-loader-plugin.version}</version>
       <type>zip</type>
       <exclusions>
         <exclusion>
@@ -194,6 +199,54 @@
       <groupId>org.pentaho.di.plugins</groupId>
       <artifactId>mysql-bulk-loader-plugins</artifactId>
       <version>${mysql-bulk-load-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>ms-access-plugins</artifactId>
+      <version>${ms-access-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>oracle-bulk-loader-plugins</artifactId>
+      <version>${oracle-bulk-loader-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>postgresql-db-bulk-loader-plugins</artifactId>
+      <version>${postgresql-db-bulk-loader-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>infobright-bulk-loader-plugins</artifactId>
+      <version>${infobright-bulk-loader-plugin.version}</version>
       <type>zip</type>
       <exclusions>
         <exclusion>
@@ -252,44 +305,8 @@
     </dependency>
     <dependency>
       <groupId>org.pentaho.di.plugins</groupId>
-      <artifactId>pdi-xml-plugin</artifactId>
-      <version>${pdi-xml-plugin.version}</version>
-      <type>zip</type>
-      <exclusions>
-        <exclusion>
-          <groupId>*</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.pentaho.di.plugins</groupId>
-      <artifactId>kettle-json-plugin</artifactId>
-      <version>${pdi-json-plugin.version}</version>
-      <type>zip</type>
-      <exclusions>
-        <exclusion>
-          <groupId>*</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.pentaho.di.plugins</groupId>
       <artifactId>kettle-sap-plugin</artifactId>
       <version>${pdi-sap-plugin.version}</version>
-      <type>zip</type>
-      <exclusions>
-        <exclusion>
-          <groupId>*</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>pentaho</groupId>
-      <artifactId>pentaho-big-data-plugin</artifactId>
-      <version>${big-data-plugin.version}</version>
       <type>zip</type>
       <exclusions>
         <exclusion>
@@ -334,7 +351,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>com.pentaho.di.plugins</groupId>
       <artifactId>mongodb-plugin</artifactId>
@@ -371,5 +387,170 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>pdi-engine-configuration-plugin</artifactId>
+      <version>${engine-configuration-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>pentaho-metastore-locator-plugin</artifactId>
+      <version>${metastore-locator-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>kettle-repository-locator-plugin</artifactId>
+      <version>${repository-locator-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>file-open-save-new-plugin</artifactId>
+      <version>${file-open-save-new-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.pentaho.di.plugins</groupId>
+      <artifactId>kettle-repository-locator-spoon-plugin</artifactId>
+      <version>${repository-locator-plugin.version}</version>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
+  <profiles>
+    <profile>
+      <id>standard</id>
+      <activation>
+        <property>
+          <name>!no-osgi</name>
+        </property>
+      </activation>
+      <properties>
+        <big-data-plugin.version>9.4.0.0-SNAPSHOT</big-data-plugin.version>
+        <pdi-json-plugin.version>9.4.0.0-SNAPSHOT</pdi-json-plugin.version>
+        <pdi-xml-plugin.version>9.4.0.0-SNAPSHOT</pdi-xml-plugin.version>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>pentaho</groupId>
+          <artifactId>pentaho-big-data-plugin</artifactId>
+          <version>${big-data-plugin.version}</version>
+          <type>zip</type>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        <dependency>
+          <groupId>org.pentaho.di.plugins</groupId>
+          <artifactId>kettle-json-plugin</artifactId>
+          <version>${pdi-json-plugin.version}</version>
+          <type>zip</type>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        <dependency>
+          <groupId>org.pentaho.di.plugins</groupId>
+          <artifactId>pdi-xml-plugin</artifactId>
+          <version>${pdi-xml-plugin.version}</version>
+          <type>zip</type>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>assembly_package</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptors>
+                    <descriptor>${basedir}/src/assemblies/assembly.xml</descriptor>
+                  </descriptors>
+                  <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>no-osgi</id>
+      <activation>
+        <property>
+          <name>no-osgi</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>assembly_package</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptors>
+                    <desciptor>${basedir}/src/assemblies/assembly-no-osgi.xml</desciptor>
+                  </descriptors>
+                  <appendAssemblyId>true</appendAssemblyId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

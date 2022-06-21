@@ -3,7 +3,7 @@
  *
  *  Pentaho Data Integration
  *
- *  Copyright (C) 2002-2017 by Hitachi Vantara : http://www.pentaho.com
+ *  Copyright (C) 2002-2022 by Hitachi Vantara : http://www.pentaho.com
  *
  *  *******************************************************************************
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -24,15 +24,10 @@
 
 package org.pentaho.di.engine.configuration.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.pentaho.di.engine.configuration.api.RunConfiguration;
 import org.pentaho.di.engine.configuration.api.RunConfigurationProvider;
@@ -40,11 +35,14 @@ import org.pentaho.di.engine.configuration.impl.pentaho.DefaultRunConfiguration;
 import org.pentaho.di.engine.configuration.impl.pentaho.DefaultRunConfigurationExecutor;
 import org.pentaho.di.engine.configuration.impl.pentaho.DefaultRunConfigurationProvider;
 import org.pentaho.di.engine.configuration.impl.spark.SparkRunConfiguration;
-import org.pentaho.di.engine.configuration.impl.spark.SparkRunConfigurationExecutor;
 import org.pentaho.di.engine.configuration.impl.spark.SparkRunConfigurationProvider;
 import org.pentaho.metastore.api.IMetaStore;
+import org.pentaho.metastore.locator.api.MetastoreLocator;
 import org.pentaho.metastore.stores.memory.MemoryMetaStore;
-import org.pentaho.osgi.metastore.locator.api.MetastoreLocator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -59,9 +57,6 @@ public class RunConfigurationManagerTest {
 
   private RunConfigurationManager executionConfigurationManager;
 
-  @Mock
-  private DefaultRunConfigurationExecutor defaultRunConfigurationExecutor;
-
   @Before
   public void setup() throws Exception {
 
@@ -69,11 +64,10 @@ public class RunConfigurationManagerTest {
     MetastoreLocator metastoreLocator = createMetastoreLocator( memoryMetaStore );
 
     DefaultRunConfigurationProvider defaultRunConfigurationProvider =
-      new DefaultRunConfigurationProvider( metastoreLocator, defaultRunConfigurationExecutor );
+      new DefaultRunConfigurationProvider( metastoreLocator );
 
-    SparkRunConfigurationExecutor sparkRunConfigurationExecutor = new SparkRunConfigurationExecutor( null );
     SparkRunConfigurationProvider sparkRunConfigurationProvider =
-      new SparkRunConfigurationProvider( metastoreLocator, sparkRunConfigurationExecutor );
+      new SparkRunConfigurationProvider( metastoreLocator );
 
     List<RunConfigurationProvider> runConfigurationProviders = new ArrayList<>();
     runConfigurationProviders.add( sparkRunConfigurationProvider );
@@ -178,13 +172,11 @@ public class RunConfigurationManagerTest {
   public void testOrdering() {
     MemoryMetaStore memoryMetaStore = new MemoryMetaStore();
     MetastoreLocator metastoreLocator = createMetastoreLocator( memoryMetaStore );
-
     DefaultRunConfigurationProvider defaultRunConfigurationProvider =
-      new DefaultRunConfigurationProvider( metastoreLocator, defaultRunConfigurationExecutor );
+      new DefaultRunConfigurationProvider( metastoreLocator );
 
-    SparkRunConfigurationExecutor sparkRunConfigurationExecutor = new SparkRunConfigurationExecutor( null );
     SparkRunConfigurationProvider sparkRunConfigurationProvider =
-      new SparkRunConfigurationProvider( metastoreLocator, sparkRunConfigurationExecutor );
+      new SparkRunConfigurationProvider( metastoreLocator );
 
     List<RunConfigurationProvider> runConfigurationProviders = new ArrayList<>();
     runConfigurationProviders.add( sparkRunConfigurationProvider );
