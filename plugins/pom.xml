@@ -75,6 +75,7 @@
         <module>ms-access</module>
         <module>xml</module>
         <module>streaming</module>
+        <module>mysql-bulk-loader</module>
       </modules>
     </profile>
 
